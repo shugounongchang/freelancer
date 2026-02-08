@@ -1,0 +1,470 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Freelancer 平台导航</title>
+  <style>
+    :root {
+      --bg: #f3f5f8;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fc;
+      --text: #182230;
+      --muted: #607086;
+      --primary: #1463ff;
+      --primary-soft: #eaf1ff;
+      --border: #d9e1ec;
+      --shadow: 0 14px 36px rgba(24, 34, 48, 0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 12%, #dbe9ff 0, transparent 34%),
+        radial-gradient(circle at 88% 88%, #e7f6ef 0, transparent 30%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1.1fr 0.9fr;
+      min-height: 100vh;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .left {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.25;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chip:hover {
+      border-color: #c4d5ff;
+      color: #36506f;
+    }
+
+    .chip.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface-soft);
+      padding: 12px;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #c4d5ff;
+      box-shadow: 0 8px 18px rgba(20, 99, 255, 0.12);
+    }
+
+    .card.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      box-shadow: 0 10px 18px rgba(20, 99, 255, 0.18);
+    }
+
+    .card h3 {
+      margin: 0 0 4px;
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .right {
+      padding: 20px;
+      display: grid;
+      align-content: start;
+      gap: 14px;
+    }
+
+    .media {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      background: #e7edf6;
+    }
+
+    .meta {
+      display: grid;
+      gap: 8px;
+    }
+
+    .meta h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .badge {
+      width: fit-content;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--surface-soft);
+    }
+
+    .info {
+      margin: 0;
+      font-size: 14px;
+      color: #253446;
+      line-height: 1.65;
+    }
+
+    .hint {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--surface);
+      transition: transform 0.15s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    @media (max-width: 980px) {
+      .page {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        max-height: 44vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="panel left">
+      <h1 class="title">Freelancer 平台总览</h1>
+      <p class="subtitle">点击左侧平台卡片，右侧查看图片、介绍与官网链接。</p>
+      <div class="chips" id="filterBar">
+        <button type="button" class="chip active" data-filter="全部">全部</button>
+        <button type="button" class="chip" data-filter="数字服务（技能出售）">数字服务（技能出售）</button>
+        <button type="button" class="chip" data-filter="实体商品（实体出售）">实体商品（实体出售）</button>
+        <button type="button" class="chip" data-filter="知识付费">知识付费</button>
+      </div>
+      <div class="grid" id="platformGrid"></div>
+    </section>
+
+    <aside class="panel right" id="detailPanel">
+      <img class="media" id="platformImage" alt="平台图片" />
+      <div class="meta">
+        <span class="badge" id="platformCategory"></span>
+        <h2 id="platformName"></h2>
+      </div>
+      <p class="info" id="platformFeature"></p>
+      <p class="hint" id="platformNote"></p>
+      <div class="actions">
+        <a class="button primary" id="platformLink" href="#" target="_blank" rel="noopener noreferrer">访问官网</a>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const platforms = [
+      {
+        name: "Upwork",
+        category: "数字服务（技能出售）",
+        feature: "综合型自由职业平台。",
+        note: "跨国项目多，适合具备英语沟通能力的自由职业者。",
+        url: "https://www.upwork.com",
+        image: "https://logo.clearbit.com/upwork.com"
+      },
+      {
+        name: "Fiverr",
+        category: "数字服务（技能出售）",
+        feature: "更偏技能产品化的服务售卖。",
+        note: "设计、网络营销等低客单/快餐式服务更常见。",
+        url: "https://www.fiverr.com",
+        image: "https://logo.clearbit.com/fiverr.com"
+      },
+      {
+        name: "Guru",
+        category: "数字服务（技能出售）",
+        feature: "偏程序员和技术类的接单平台。",
+        note: "适合软件开发相关岗位。",
+        url: "https://www.guru.com",
+        image: "https://logo.clearbit.com/guru.com"
+      },
+      {
+        name: "Freelancer",
+        category: "数字服务（技能出售）",
+        feature: "老牌平台，采用 bid 竞标机制。",
+        note: "竞争激烈，需要控制竞标成本。",
+        url: "https://www.freelancer.com",
+        image: "https://logo.clearbit.com/freelancer.com"
+      },
+      {
+        name: "Toptal",
+        category: "数字服务（技能出售）",
+        feature: "准入门槛较高，主打高端项目。",
+        note: "更适合资深从业者和高报价项目。",
+        url: "https://www.toptal.com",
+        image: "https://logo.clearbit.com/toptal.com"
+      },
+      {
+        name: "99Designs",
+        category: "实体商品（实体出售）",
+        feature: "面向设计师的竞赛与雇佣平台。",
+        note: "尤其适合平面设计方向。",
+        url: "https://99designs.com",
+        image: "https://logo.clearbit.com/99designs.com"
+      },
+      {
+        name: "Etsy",
+        category: "实体商品（实体出售）",
+        feature: "手工与创意商品销售平台。",
+        note: "适合手工制品、创意小物与 3D 打印等。",
+        url: "https://www.etsy.com",
+        image: "https://logo.clearbit.com/etsy.com"
+      },
+      {
+        name: "Pinkoi",
+        category: "实体商品（实体出售）",
+        feature: "手作与设计品平台。",
+        note: "亚洲受众较多，审美更趋一致。",
+        url: "https://www.pinkoi.com",
+        image: "https://logo.clearbit.com/pinkoi.com"
+      },
+      {
+        name: "Ravelry",
+        category: "实体商品（实体出售）",
+        feature: "编织相关社区与资源平台。",
+        note: "适合编织、钩针、纺纱人群交流图案和作品。",
+        url: "https://www.ravelry.com",
+        image: "https://logo.clearbit.com/ravelry.com"
+      },
+      {
+        name: "ProZ",
+        category: "数字服务（技能出售）",
+        feature: "翻译自由职业平台。",
+        note: "翻译工作机会相对集中。",
+        url: "https://www.proz.com",
+        image: "https://logo.clearbit.com/proz.com"
+      },
+      {
+        name: "TranslatorsCafe",
+        category: "数字服务（技能出售）",
+        feature: "翻译自由职业平台。",
+        note: "与 ProZ 定位相似。",
+        url: "https://www.translatorscafe.com",
+        image: "https://logo.clearbit.com/translatorscafe.com"
+      },
+      {
+        name: "跟谁学",
+        category: "知识付费",
+        feature: "以授课变现为主。",
+        note: "可按小时收费，适合课程或训练营交付。",
+        url: "https://www.gaotu.cn",
+        image: "https://logo.clearbit.com/gaotu.cn"
+      },
+      {
+        name: "在行",
+        category: "知识付费",
+        feature: "付费咨询平台。",
+        note: "适合以咨询和经验输出变现。",
+        url: "https://www.zaih.com",
+        image: "https://logo.clearbit.com/zaih.com"
+      },
+      {
+        name: "极牛网",
+        category: "知识付费",
+        feature: "技术创业人兼职俱乐部。",
+        note: "可与技术专家面对面交流。",
+        url: "https://www.jiniuwang.com",
+        image: "https://logo.clearbit.com/jiniuwang.com"
+      }
+    ];
+
+    const grid = document.getElementById("platformGrid");
+    const filterBar = document.getElementById("filterBar");
+    const platformImage = document.getElementById("platformImage");
+    const platformCategory = document.getElementById("platformCategory");
+    const platformName = document.getElementById("platformName");
+    const platformFeature = document.getElementById("platformFeature");
+    const platformNote = document.getElementById("platformNote");
+    const platformLink = document.getElementById("platformLink");
+
+    const fallbackImage = (name) => {
+      const color = "1463ff";
+      const text = encodeURIComponent(name.slice(0, 2));
+      return `https://dummyimage.com/960x540/eaf1ff/${color}&text=${text}`;
+    };
+
+    function renderDetails(item) {
+      platformImage.src = item.image;
+      platformImage.alt = `${item.name} 平台图片`;
+      platformImage.onerror = () => {
+        platformImage.onerror = null;
+        platformImage.src = fallbackImage(item.name);
+      };
+      platformCategory.textContent = item.category;
+      platformName.textContent = item.name;
+      platformFeature.textContent = item.feature;
+      platformNote.textContent = item.note;
+      platformLink.href = item.url;
+      platformLink.textContent = `访问官网：${item.url.replace(/^https?:\/\//, "")}`;
+    }
+
+    let activeFilter = "全部";
+    let filteredPlatforms = [...platforms];
+    let activePlatformName = platforms[0].name;
+
+    function updateFilterButtons() {
+      filterBar.querySelectorAll(".chip").forEach((button) => {
+        button.classList.toggle("active", button.dataset.filter === activeFilter);
+      });
+    }
+
+    function updateActiveCard() {
+      grid.querySelectorAll(".card").forEach((card) => {
+        card.classList.toggle("active", card.dataset.name === activePlatformName);
+      });
+    }
+
+    function setActiveByName(name) {
+      const selected = filteredPlatforms.find((item) => item.name === name);
+      if (!selected) return;
+      activePlatformName = selected.name;
+      renderDetails(selected);
+      updateActiveCard();
+    }
+
+    function renderCards() {
+      grid.innerHTML = "";
+      filteredPlatforms.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.tabIndex = 0;
+        card.dataset.name = item.name;
+        card.innerHTML = `<h3>${item.name}</h3><p>${item.category}</p>`;
+        card.addEventListener("click", () => setActiveByName(item.name));
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setActiveByName(item.name);
+          }
+        });
+        grid.appendChild(card);
+      });
+      updateActiveCard();
+    }
+
+    function applyFilter(nextFilter) {
+      activeFilter = nextFilter;
+      filteredPlatforms = nextFilter === "全部"
+        ? [...platforms]
+        : platforms.filter((item) => item.category === nextFilter);
+      updateFilterButtons();
+      if (!filteredPlatforms.some((item) => item.name === activePlatformName)) {
+        activePlatformName = filteredPlatforms[0].name;
+      }
+      renderCards();
+      setActiveByName(activePlatformName);
+    }
+
+    filterBar.querySelectorAll(".chip").forEach((button) => {
+      button.addEventListener("click", () => {
+        applyFilter(button.dataset.filter);
+      });
+    });
+
+    applyFilter("全部");
+  </script>
+</body>
+</html>
