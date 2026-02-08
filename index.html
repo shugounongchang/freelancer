@@ -34,7 +34,7 @@
       inset: -8%;
       background-position: center;
       background-size: cover;
-      filter: blur(34px) saturate(120%);
+      filter: blur(8px) saturate(120%);
       transform: scale(1.08);
       opacity: 0.58;
       transition: background-image 0.32s ease, opacity 0.2s ease;
@@ -243,11 +243,6 @@
     .button:hover {
       transform: translateY(-1px);
       background: rgba(255, 255, 255, 0.3);
-    }
-
-    .score {
-      font-size: 12px;
-      color: rgba(229, 237, 252, 0.9);
     }
 
     @media (max-width: 1180px) {
@@ -502,7 +497,6 @@
             <p class="hint">${item.note}</p>
             <div class="actions">
               <a class="button" href="${item.url}" target="_blank" rel="noopener noreferrer">访问官网</a>
-              <span class="score">点击卡片可高亮</span>
             </div>
           </div>
         `;
